@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Electron Boilerplate</title>
+    <link rel="stylesheet" href="Font-Awesome/css/all.css" />
+    <link rel="stylesheet" href="../src/pomodoro/pomodoro.css" />
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css" />
+  </head>
+  <body>
+    <div id="app" class="container">
+      <!-------------Hamburger Menu------------>
+      <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+      </div>
+      <!------------------->
+      <div class="timer">
+        <svg
+          width="163"
+          height="165"
+          viewBox="-8 -8 184 188"
+          fill="none"
+          id="first-segment"
+        >
+          <path
+            stroke-opacity="0"
+            stroke="#eece22"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M165.16,163.38A172,172,0,0,0,0,0"
+          />
+          <path
+            id="top-right"
+            stroke="#F85959"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M165.16,163.38A172,172,0,0,0,0,0"
+          />
+        </svg>
+        <svg
+          width="163"
+          height="165"
+          viewBox="-8 -8 184 188"
+          fill="none"
+          id="second-segment"
+        >
+          <path
+            stroke-opacity="0"
+            stroke="#1bbee5"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M0,163.34A172,172,0,0,0,164.44,0"
+          />
+          <path
+            id="bottom-right"
+            stroke="#e9c52d"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M0,163.34A172,172,0,0,0,164.44,0"
+          />
+        </svg>
+        <svg
+          width="163"
+          height="165"
+          viewBox="-8 -8 184 188"
+          fill="none"
+          id="third-segment"
+        >
+          <path
+            stroke-opacity="0"
+            stroke="#E9D2B1"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M0,0A172,172,0,0,0,165.16,162.61"
+          />
+          <path
+            id="bottom-left"
+            stroke="#F85959"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M0,0A172,172,0,0,0,165.16,162.61"
+          />
+        </svg>
+        <svg
+          width="163"
+          height="165"
+          viewBox="-8 -8 184 188"
+          fill="none"
+          id="fourth-segment"
+        >
+          <path
+            stroke-opacity="0"
+            stroke="#E9D2B1"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M160.17,0A172,172,0,0,0,0,161.51"
+          />
+          <path
+            id="top-left"
+            stroke="#1ab7e0"
+            stroke-width="15"
+            stroke-linecap="round"
+            d="M160.17,0A172,172,0,0,0,0,161.51"
+          />
+        </svg>
+        <!-------------------------->
+        <div class="time-display">
+          <div class="tags has-addons">
+            <span class="tag is-danger is-rounded">simhub-Pomodoro</span>
+            <a class="tag fas fa-clock is-rounded"></a>
+          </div>
+          <!-- <span class="tag is-large" id="timeDisplay">0</span> -->
+          <span id="timeDisplay"></span>
+        </div>
+      </div>
+
+      <!------------------------>
+      <div class="section" id="form">
+        <div class="time-wrapper">
+          <div id="timeInputLabelContainer">
+            <label for="work-time">Work-Time</label>
+            <label for="break-time">Break-Time</label>
+          </div>
+          <div id="timeInputContainer" class="tags has-addons">
+            <input
+              id="workTime"
+              class="tag is-danger input"
+              type="number"
+              placeholder="work-time"
+              value="25"
+            />
+            <input
+              id="breakTime"
+              class="tag input"
+              type="number"
+              placeholder="break-time"
+              value="5"
+            />
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <!-- <div class="field-body"> -->
+          <!-- <div class="field"> -->
+          <!-- <p class="control is-expanded has-icons-right"> -->
+          <!-- <label for="work-time">Work-Time</label> -->
+          <!-- <input -->
+          <!-- id="workTime" -->
+          <!-- class="input button is-medium" -->
+          <!-- type="number" -->
+          <!-- placeholder="work-time" -->
+          <!-- value="25" -->
+          <!-- /> -->
+          <!-- <span class="icon is-small is-right"> -->
+          <!-- <i class="fas fa-clock"></i> -->
+          <!-- </span> -->
+          <!-- </p> -->
+          <!-- </div> -->
+          <!-- <div class="field"> -->
+          <!-- <p class="control is-expanded has-icons-left has-icons-right"> -->
+          <!-- <label for="break-time">Break-Time</label> -->
+          <!-- <input -->
+          <!-- id="breakTime" -->
+          <!-- class="input button is-medium" -->
+          <!-- type="number" -->
+          <!-- name="break-time" -->
+          <!-- placeholder="break-time" -->
+          <!-- value="15" -->
+          <!-- /> -->
+          <!-- <span class="icon is-small is-right"> -->
+          <!-- <i class="fas fa-clock"></i> -->
+          <!-- </span> -->
+          <!-- </p> -->
+          <!-- </div> -->
+          <!-- </div> -->
+          <button
+            class="button is-link is-fullwidth is-medium"
+            id="handleTimer"
+          >
+            Start!
+          </button>
+        </div>
+      </div>
+    </div>
+    <!---End Wrapper--->
+
+    <script src="app.js"></script>
+  </body>
+</html>

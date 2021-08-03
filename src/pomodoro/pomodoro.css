@@ -1,0 +1,220 @@
+body {
+  background: url(../../app/images/bg1.png) no-repeat;
+  background-size: cover;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+
+.title {
+  margin-top: 50px;
+}
+
+h1 {
+  color: #c44747;
+  font-size: 64px;
+}
+.field label {
+  font-weight: 900;
+  font-size: 1.2em;
+  color: black;
+  background: white;
+}
+.timer {
+  margin-top: 25px;
+  width: 330px;
+  height: 330px;
+  position: relative;
+}
+#form {
+  margin-top: -21px;
+}
+#timeDisplay {
+  font-size: 1.5em;
+  /* background-color: transparent; */
+  /* border: 1px dashed white; */
+}
+#timeInputLabelContainer {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: white; */
+  padding: 3px;
+}
+#timeInputLabelContainer label {
+  font-weight: 900;
+  font-size: 1em;
+}
+#timeInputLabelContainer label:nth-child(1) {
+  color: white;
+}
+#timeInputContainer {
+  flex-wrap: nowrap;
+}
+#workTime {
+  /* color: white; */
+  /* background: #1bbee5; */
+  /* border: 1px dashed black; */
+  font-weight: bold;
+  font-size: 1em;
+}
+#breakTime {
+  /* color: white; */
+  background: #eece22;
+  /* border: 1px dashed black; */
+  font-weight: bold;
+  font-size: 1em;
+}
+#handleTimer {
+  font-weight: bold;
+  /* background: transparent; */
+  /* border: 1px solid; */
+}
+#first-segment {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+#second-segment {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+#third-segment {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+#fourth-segment {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.time-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  font-size: 48px;
+  line-height: 48px;
+  text-align: center;
+  color: #ff8080;
+}
+
+h2 {
+  font-size: 64px;
+  color: #f85959;
+  text-align: center;
+}
+
+/* button { */
+/* margin-top: 90px; */
+/* width: 200px; */
+/* height: 68px; */
+/* background: #f85959; */
+/* border-radius: 20px; */
+/* border: none; */
+/* cursor: pointer; */
+
+/* font-size: 36px; */
+/* line-height: 45px; */
+/* text-align: center; */
+/* color: #fff8ee; */
+/* } */
+
+/* button:focus { */
+/* outline: none; */
+/* } */
+
+/* button:disabled { */
+/* opacity: 0.6; */
+/* cursor: default; */
+/* } */
+/******************/
+.field-body {
+  display: flex;
+}
+/* .field:nth-child(1) { */
+/* flex: 9; */
+/* } */
+/* .field:nth-child(2) { */
+/* flex: 11; */
+/* } */
+/* .field:nth-child(3) { */
+/* flex: 15; */
+/* } */
+/*******************/
+canvas {
+  background: none;
+}
+
+/********HAmbuerger Menu********/
+#menu__toggle {
+  opacity: 0;
+}
+
+#menu__toggle:checked ~ .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked ~ .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+#menu__toggle:checked ~ .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  visibility: visible;
+  left: 0;
+}
+
+.menu__btn {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  width: 26px;
+  height: 26px;
+
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+
+  width: 75%;
+  height: 2px;
+
+  background-color: #616161;
+
+  transition-duration: 0.25s;
+}
+.menu__btn > span::before {
+  content: "";
+  top: -8px;
+}
+.menu__btn > span::after {
+  content: "";
+  top: 8px;
+}
