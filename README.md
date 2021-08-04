@@ -1,8 +1,6 @@
 # simhub-pomodoro-timer  
 ----------------------------
-<img width="250" src="src/assets/01.png" />
-<img width="225" src="src/assets/03.png" />
-<img width="200" src="src/assets/02.png" />
+<img width="250" src="src/assets/01.png" /><img width="225" src="src/assets/03.png" /><img width="200" src="src/assets/02.png" />
 
 
 # electron-boilerplate
