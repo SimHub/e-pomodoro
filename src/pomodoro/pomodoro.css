@@ -212,7 +212,8 @@ canvas {
   width: 75%;
   height: 2px;
 
-  background-color: #616161;
+  /* background-color: #616161; */
+  background-color: whitesmoke;
 
   transition-duration: 0.25s;
 }
