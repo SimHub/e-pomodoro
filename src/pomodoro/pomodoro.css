@@ -1,6 +1,8 @@
 body {
-  background: url(../../app/images/bg1.png) no-repeat;
-  background-size: cover;
+  /* background: url(../../app/images/bg1.png) no-repeat; */
+  /* background-size: cover; */
+  background-color: black;
+  transition: 04s ease-in-out;
 }
 .container {
   height: 100vh;
@@ -51,6 +53,10 @@ h1 {
 #timeInputLabelContainer label:nth-child(1) {
   color: white;
 }
+#timeInputLabelContainer label:nth-child(2) {
+  color: bisque;
+}
+
 #timeInputContainer {
   flex-wrap: nowrap;
 }

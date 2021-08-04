@@ -258,6 +258,10 @@ export default class Pomodoro {
     this.pomodoroDuration = this.currentTimeInSeconds;
     console.log("startREST pomodoroDuration: ", this.pomodoroDuration);
     this.reduceTime();
+    // document.body.style.backgroundImage =
+    // "url('../../app/images/bg2.png') no-repeat";
+    // document.body.style.backgroundSize = "cover";
+
     setTimeout(() => {
       clearInterval(this.interval);
       this.currentTimeInSeconds = this.pomodoroDuration;
