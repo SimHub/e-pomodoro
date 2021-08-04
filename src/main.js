@@ -49,28 +49,29 @@ const initIpc = () => {
     shell.openExternal(href);
   });
 };
+const _option = {
+  height: 600,
+  width: 370,
+  movable: true,
+  skipTaskbar: true,
+  // frame: false,
+  minimizable: true,
+  maximizable: true,
+  closable: true,
+  autoHideMenuBar: true,
+  webPreferences: {
+    // Two properties below are here for demo purposes, and are
+    // security hazard. Make sure you know what you're doing
+    // in your production app.
+    nodeIntegration: true,
+    contextIsolation: false,
+    // Spectron needs access to remote module
+    // enableRemoteModule: env.name === "test",
+  },
+};
 
-function createMainWindow() {
-  const mainWindow = createWindow("main", {
-    height: 600,
-    width: 370,
-    movable: true,
-    skipTaskbar: true,
-    // frame: false,
-    minimizable: true,
-    maximizable: true,
-    closable: true,
-    autoHideMenuBar: true,
-    webPreferences: {
-      // Two properties below are here for demo purposes, and are
-      // security hazard. Make sure you know what you're doing
-      // in your production app.
-      nodeIntegration: true,
-      contextIsolation: false,
-      // Spectron needs access to remote module
-      // enableRemoteModule: env.name === "test",
-    },
-  });
+function createMainWindow(option) {
+  const mainWindow = createWindow("main", option);
 
   mainWindow.setAlwaysOnTop(true);
 
@@ -87,13 +88,27 @@ function createMainWindow() {
   }
 
   console.log("MINIMIZED: ", mainWindow.isMinimized());
+  //### minimize window
+  ipcMain.on("minimize", (event, arg) => {
+    // console.log(arg);
+    if (!arg) {
+      mainWindow.setSize(370, 600);
+      event.reply("minimize", false);
+    }
+    if (arg) {
+      mainWindow.setSize(290, 290);
+      event.reply("minimize", true);
+    }
+  });
 }
+
 app.on("ready", () => {
   setApplicationMenu();
   initIpc();
 
   // createWindow
-  createMainWindow();
+  createMainWindow(_option);
+
   ///### Notification
   // ipcMain.on("Notify", (event, arg) => {
   // const NOTIFICATION_TITLE = "RELAX!";
@@ -113,7 +128,7 @@ app.on("ready", () => {
       label: "simhub-pomodoro",
       click() {
         if (BrowserWindow.getAllWindows().length === 0) {
-          createMainWindow();
+          createMainWindow(_option);
         }
       },
     },
