@@ -27,10 +27,13 @@ h1 {
   background: white;
 }
 .timer {
-  margin-top: 25px;
+  margin-top: 0;
   width: 330px;
   height: 330px;
   position: relative;
+}
+#app.container {
+  /* transition: 0.3s ease-out; */
 }
 #form {
   margin-top: -21px;
@@ -65,16 +68,21 @@ h1 {
   /* background: #1bbee5; */
   /* border: 1px dashed black; */
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 #breakTime {
   /* color: white; */
   background: #eece22;
   /* border: 1px dashed black; */
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.2em;
+}
+#handleTimerContainer {
+  position: absolute;
+  bottom: 80px;
 }
 #handleTimer {
+  display: none;
   font-weight: bold;
   /* background: transparent; */
   /* border: 1px solid; */
@@ -102,8 +110,8 @@ h1 {
   top: 0px;
   left: 0px;
 }
-
 .time-display {
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -127,48 +135,23 @@ h2 {
   text-align: center;
 }
 
-/* button { */
-/* margin-top: 90px; */
-/* width: 200px; */
-/* height: 68px; */
-/* background: #f85959; */
-/* border-radius: 20px; */
-/* border: none; */
-/* cursor: pointer; */
-
-/* font-size: 36px; */
-/* line-height: 45px; */
-/* text-align: center; */
-/* color: #fff8ee; */
-/* } */
-
-/* button:focus { */
-/* outline: none; */
-/* } */
-
-/* button:disabled { */
-/* opacity: 0.6; */
-/* cursor: default; */
-/* } */
-/******************/
+/***** Modal *****/
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+/*********************/
 .field-body {
   display: flex;
 }
-/* .field:nth-child(1) { */
-/* flex: 9; */
-/* } */
-/* .field:nth-child(2) { */
-/* flex: 11; */
-/* } */
-/* .field:nth-child(3) { */
-/* flex: 15; */
-/* } */
-/*******************/
 canvas {
   background: none;
 }
 
-/********HAmbuerger Menu********/
+/********Hambuerger Menu********/
+.hamburger-menu {
+  position: absolute;
+}
 #menu__toggle {
   opacity: 0;
 }
@@ -190,7 +173,7 @@ canvas {
 }
 
 .menu__btn {
-  display: flex;
+  display: none;
   align-items: center;
   position: fixed;
   top: 20px;
@@ -201,6 +184,9 @@ canvas {
 
   cursor: pointer;
   z-index: 1;
+}
+.menu__btn.active {
+  display: flex;
 }
 
 .menu__btn > span,

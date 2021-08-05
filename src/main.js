@@ -8,7 +8,6 @@ import {
   Menu,
   ipcMain,
   shell,
-  Tray,
   nativeImage,
   BrowserWindow,
   Notification,
@@ -22,7 +21,7 @@ import createWindow from "./helpers/window";
 // in config/env_xxx.json file.
 import env from "env";
 
-let tray;
+let minimizedCount = 0;
 // Save userData in separate folders for each environment.
 // Thanks to this you can use production and development versions of the app
 // on same machine like those are two separate apps.
@@ -50,15 +49,16 @@ const initIpc = () => {
   });
 };
 const _option = {
-  height: 600,
-  width: 370,
+  height: 356,
+  width: 380,
   movable: true,
-  skipTaskbar: true,
+  // resizable: false,
+  // skipTaskbar: true,
   // frame: false,
-  minimizable: true,
-  maximizable: true,
-  closable: true,
-  autoHideMenuBar: true,
+  // minimizable: true,
+  // maximizable: true,
+  // closable: true,
+  // autoHideMenuBar: true,
   webPreferences: {
     // Two properties below are here for demo purposes, and are
     // security hazard. Make sure you know what you're doing
@@ -70,11 +70,20 @@ const _option = {
   },
 };
 
+function minimizeWindow(mainWindow) {
+  ipcMain.on("minimize", (event, arg) => {
+    if (!arg) {
+      mainWindow.setSize(356, 380, true);
+      event.reply("minimize", false);
+    }
+    if (arg) {
+      mainWindow.setSize(230, 70, true);
+      event.reply("minimize", true);
+    }
+  });
+}
 function createMainWindow(option) {
   const mainWindow = createWindow("main", option);
-
-  mainWindow.setAlwaysOnTop(true);
-
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, "app.html"),
@@ -82,60 +91,19 @@ function createMainWindow(option) {
       slashes: true,
     })
   );
-
+  mainWindow.setAlwaysOnTop(true);
   if (env.name === "development") {
     mainWindow.openDevTools();
   }
-
-  console.log("MINIMIZED: ", mainWindow.isMinimized());
-  //### minimize window
-  ipcMain.on("minimize", (event, arg) => {
-    // console.log(arg);
-    if (!arg) {
-      mainWindow.setSize(370, 600);
-      event.reply("minimize", false);
-    }
-    if (arg) {
-      mainWindow.setSize(290, 290);
-      event.reply("minimize", true);
-    }
-  });
+  ///### MINIMIZE WINDOW
+  minimizeWindow(mainWindow);
 }
 
 app.on("ready", () => {
   setApplicationMenu();
-  initIpc();
-
+  // initIpc();
   // createWindow
   createMainWindow(_option);
-
-  ///### Notification
-  // ipcMain.on("Notify", (event, arg) => {
-  // const NOTIFICATION_TITLE = "RELAX!";
-  // const NOTIFICATION_BODY = `Please take a Break 😴`;
-  // // event.reply("Notify", "ready");
-  // console.log(arg); // prints "ping"
-  // new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY });
-  // });
-  ///### TRAY
-  const icon = nativeImage.createFromPath(
-    path.join(__dirname, "..", "src", "assets/pomodoro.png")
-  );
-  tray = new Tray(icon);
-
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: "simhub-pomodoro",
-      click() {
-        if (BrowserWindow.getAllWindows().length === 0) {
-          createMainWindow(_option);
-        }
-      },
-    },
-  ]);
-
-  tray.setToolTip("This is my application.");
-  tray.setContextMenu(contextMenu);
 });
 
 app.on("window-all-closed", () => {

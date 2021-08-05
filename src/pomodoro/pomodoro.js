@@ -6,7 +6,7 @@ export default class Pomodoro {
   constructor(
     workTimer,
     breakTimer,
-    startBtn,
+    handleTimerBtn,
     timeDisplayBox,
     setPomodoroTimer
   ) {
@@ -17,7 +17,7 @@ export default class Pomodoro {
     this.workTimer = workTimer;
     this.breakTimer = breakTimer;
     this.timeDisplayBox = timeDisplayBox;
-    this.setPomodoroTimer = setPomodoroTimer;
+    // this.setPomodoroTimer = setPomodoroTimer;
 
     // this.pomodoroDuration = this.workTimer.value * 60; // 25 mins to secs
     // this.restDuration = this.breakTimer.value * 60;
@@ -26,8 +26,8 @@ export default class Pomodoro {
 
     this.currentTimeInSeconds = this.pomodoroDuration;
     this.currentSegment = 1;
-    this.buttonText = startBtn.innerText;
-    this.startBtn = startBtn;
+    this.buttonText = handleTimerBtn.dataset.btnstate;
+    this.handleTimerBtn = handleTimerBtn;
     this.topRight = null;
     this.bottomRight = null;
     this.bottomLeft = null;
@@ -50,12 +50,13 @@ export default class Pomodoro {
 
     this.topLeft = new ProgressBar.Path("#top-left", this.pathOptions);
     this.topLeft.set(1);
-    this.workTimer.addEventListener("change", function (e) {
-      console.log(e.target.value);
-    });
 
-    workTimer.addEventListener("change", this.workTimerOnChange.bind(this));
-    breakTimer.addEventListener("change", this.breakTimerOnChange.bind(this));
+    // workTimer.addEventListener("change", this.workTimerOnChange.bind(this));
+    // breakTimer.addEventListener("change", this.breakTimerOnChange.bind(this));
+
+    handleTimerBtn.addEventListener("click", () => {
+      this.handleTimer();
+    });
   }
 
   workTimerOnChange(e) {
@@ -66,34 +67,49 @@ export default class Pomodoro {
     const val = e.target.value;
     this.restDuration = val * 60;
   }
-  handleTimer() {
+  handleTimer(first = false, wv = null, bv = null) {
     // debugger;
-    // console.log("handleTimer");
+    // if (first) this.buttonText = "Start!";
+    console.log("BUTTONTEXT: ", this.buttonText);
+    console.log("handleTimer");
     console.log("currentTimeInSeconds", this.currentTimeInSeconds);
     // console.log("INTERVAL: ", this.interval);
     console.log("After-currentTimeInSeconds", this.currentTimeInSeconds);
     console.log("ALERTFIRST: ", this._alertWFirst);
     if (!this._alertWFirst) {
+      // debugger;
       this.currentTimeInSeconds = this.workTimer.value * 60;
       this.restDuration = this.breakTimer.value * 60;
       this._alertWFirst = true;
     }
+    if (!this._alertWFirst) {
+      if (first) {
+        // this.buttonText = "Start!";
+        // this.handleTimerBtn.dataset.btnstate = "Start!";
+        // this.handleTimerBtn.innerText = "Start!";
+        this.currentTimeInSeconds = wv * 60;
+        this.restDuration = bv * 60;
+      }
+    }
+    console.log("BUTTONTEXT:", this.buttonText);
+    // debugger;
     if (this.buttonText === "Start!" || this.buttonText === "Resume") {
-      // debugger;
       this.animateBar();
       this.buttonText = "Pause";
-      this.startBtn.innerText = "Pause";
-      this.startBtn.classList.remove("is-success");
+      this.handleTimerBtn.dataset.btnstate = "Pause";
+      this.handleTimerBtn.innerText = "Pause";
+      this.handleTimerBtn.classList.remove("is-success");
 
-      this.startBtn.classList.add("is-info");
+      this.handleTimerBtn.classList.add("is-info");
       this.timeDisplayBox.classList.add("is-dark");
-      if (this._alertW) this._alertW = false;
+      // if (this._alertW) this._alertW = false;
     } else if (this.buttonText === "Pause") {
       this.pauseBar();
       this.buttonText = "Resume";
-      this.startBtn.innerText = "Resume";
-      this.startBtn.classList.remove("is-info");
-      this.startBtn.classList.remove("is-success");
+      this.handleTimerBtn.dataset.btnstate = "Resume";
+      this.handleTimerBtn.innerText = "Resume";
+      this.handleTimerBtn.classList.remove("is-info");
+      this.handleTimerBtn.classList.remove("is-success");
 
       this.timeDisplayBox.classList.remove("is-dark");
     }
@@ -101,9 +117,9 @@ export default class Pomodoro {
   }
   animateBar() {
     this.reduceTime();
-    // console.log("SETP ", this.setPomodoroTimer);
-    // console.log(this.currentSegment);
-    // console.log("INTERVAL: ", this.interval);
+    console.log("setPomodoroTimer+++ ", this.setPomodoroTimer);
+    console.log("CURRENT_SEGMENT+++: ", this.currentSegment);
+    console.log("INTERVAL+++: ", this.interval);
     let segment = null;
     switch (this.currentSegment) {
       case 1:
@@ -153,12 +169,14 @@ export default class Pomodoro {
     if (this.currentTimeInSeconds <= 0) {
       if (this.currentSegment < 4) {
         this.currentSegment += 1;
+        console.log("TAKEABREAK CURRENT_SEGMENT: ", this.currentSegment);
         this.takeABrake();
         this._alert = false;
         this._alertWFirst = true;
       } else {
         // Reset all
         this.resetAll();
+        clearInterval(this.interval);
         return;
       }
       // Clear interval
@@ -169,9 +187,10 @@ export default class Pomodoro {
       // Immediately disable button and set state
       this.resting = true;
       this.buttonText = "Rest";
-      this.startBtn.innerText = "Rest";
-      this.startBtn.classList.add("is-success");
-      this.startBtn.classList.remove("is-info");
+      this.handleTimerBtn.dataset.btnstate = "Rest";
+      this.handleTimerBtn.innerText = "Rest";
+      this.handleTimerBtn.classList.add("is-success");
+      this.handleTimerBtn.classList.remove("is-info");
 
       this.timeDisplayBox.classList.add("is-success");
 
@@ -185,33 +204,39 @@ export default class Pomodoro {
       // }, 4200);
     }
   }
-  resetAll() {
+  resetAll(fromBtn = false) {
     this.topRight.set(1);
     this.topLeft.set(1);
     this.bottomRight.set(1);
     this.bottomLeft.set(1);
 
-    confetti({
-      particleCount: 300,
-      spread: 100,
-      origin: { y: 0.7 },
-    });
-
-    this.goHome();
+    if (!fromBtn) {
+      confetti({
+        particleCount: 300,
+        spread: 100,
+        origin: { y: 0.7 },
+      });
+      this.goHome();
+    }
     this.currentSegment = 1;
     this._alertWFirst = false;
 
     // Clear interval
     clearInterval(this.interval);
     // Immediately disable button and set state
+    this.interval = null;
     this.resting = false;
     this.buttonText = "Start!";
-    this.startBtn.innerText = "Start!";
-    this.startBtn.classList.remove("is-success");
-    this.startBtn.classList.remove("is-info");
-    this.startBtn.classList.add("is-link");
+    this.handleTimerBtn.dataset.btnstate = "Start!";
+    this.handleTimerBtn.innerText = "Start!";
+    this.handleTimerBtn.classList.remove("is-success");
+    this.handleTimerBtn.classList.remove("is-info");
+    this.handleTimerBtn.classList.add("is-link");
 
     this.timeDisplayBox.classList.add("is-success");
+
+    // this.workTimer.value = 25;
+    // this.breakTimer.value = 5;
   }
   reduceTime() {
     this.timeDisplayBox.innerHTML = this.tagTemplate();
@@ -225,6 +250,9 @@ export default class Pomodoro {
       // console.log("INTERVAL: ", this.interval);
     }, 1000);
     console.log("INTERVAL-REDUCETIME: ", this.interval);
+    console.log("reduceTime-alertW ", this._alertW);
+    console.log("reduceTime-alert ", this._alert);
+    console.log("reduceTime-alertWFirst ", this._alertWFirst);
   }
   tagTemplate() {
     console.log("Resting: ", this.resting);
@@ -261,19 +289,24 @@ export default class Pomodoro {
     // document.body.style.backgroundImage =
     // "url('../../app/images/bg2.png') no-repeat";
     // document.body.style.backgroundSize = "cover";
-
+    this.handleTimerBtn.setAttribute("disabled", "true");
     setTimeout(() => {
       clearInterval(this.interval);
       this.currentTimeInSeconds = this.pomodoroDuration;
       this.buttonText = "Start!";
-      this.startBtn.innerText = "Start!";
-      this.startBtn.classList.remove("is-info");
-      this.startBtn.classList.remove("is-success");
+      this.handleTimerBtn.dataset.btnstate = "Start!";
+      this.handleTimerBtn.innerText = "Start!";
+      this.handleTimerBtn.classList.remove("is-info");
+      this.handleTimerBtn.classList.remove("is-success");
+      this.handleTimerBtn.removeAttribute("disabled");
 
       this.timeDisplayBox.classList.remove("is-success");
       this.resting = false;
 
+      console.info("ALERTWFIRST-rest: ", this._alertWFirst);
       if (this._alertWFirst) {
+        if (this._alertW) this._alertW = false;
+        // console.info("GOTOWORK");
         this.gotToWork();
       }
     }, this.restDuration * 1000);
@@ -288,19 +321,19 @@ export default class Pomodoro {
     return _time;
   }
   takeABrake() {
-    console.info(this._alert);
+    console.info("ALERT: ", this._alert);
     const NOTIFICATION_TITLE = "RELAX!";
     const NOTIFICATION_BODY = `Please take a Break 😴`;
     if (!this._alert) {
-      // ipcRenderer.send("Notify", "ready");
-      // ipcRenderer.on("Notify", (event, arg) => {
       new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY });
-      // });
       this._alert = true;
     }
+    console.info("ALERT-after: ", this._alert);
   }
   gotToWork() {
-    const NOTIFICATION_TITLE = "WORK!";
+    console.log("NOTIFY");
+    console.log("alertW ", this._alertW);
+    const NOTIFICATION_TITLE = `WORK! ROUND-${this.currentSegment}`;
     const NOTIFICATION_BODY = `Keep working!`;
     if (!this._alertW) {
       new Notification(NOTIFICATION_TITLE, {
@@ -308,22 +341,24 @@ export default class Pomodoro {
       }).onclick = () => {
         this.animateBar();
         this.buttonText = "Pause";
-        this.startBtn.innerText = "Pause";
-        this.startBtn.classList.remove("is-success");
+        this.handleTimerBtn.dataset.btnstate = "Pause";
+        this.handleTimerBtn.innerText = "Pause";
+        this.handleTimerBtn.classList.remove("is-success");
 
-        this.startBtn.classList.add("is-info");
+        this.handleTimerBtn.classList.add("is-info");
         this.timeDisplayBox.classList.add("is-dark");
-        if (this._alertW) this._alertW = false;
+        // if (this._alertW) this._alertW = false;
       };
       this._alertW = true;
     }
+    console.log("alertW-after ", this._alertW);
   }
   goHome() {
     const NOTIFICATION_TITLE = "GO HOME!";
     const NOTIFICATION_BODY = "YOU DID A GREAT JOB!";
-    if (!this._alertG) {
-      new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY });
-      this._alertG = true;
-    }
+    // if (!this._alertG) {
+    new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY });
+    // this._alertG = true;
+    // }
   }
 }

@@ -108,81 +108,67 @@
         </svg>
         <!-------------------------->
         <div class="time-display">
-          <div class="tags has-addons">
-            <span class="tag is-danger is-rounded">simhub-Pomodoro</span>
-            <a class="tag fas fa-clock is-rounded"></a>
+          <div id="timeDisplayTitleTag" class="tags has-addons">
+            <span class="tag is-danger is-rounded is-medium"
+              >simhub-Pomodoro</span
+            >
+            <a id="settings" class="tag fas fa-cogs is-medium"></a>
           </div>
           <!-- <span class="tag is-large" id="timeDisplay">0</span> -->
           <span id="timeDisplay"></span>
         </div>
       </div>
 
-      <!------------------------>
-      <div class="section" id="form">
-        <div class="time-wrapper">
-          <div id="timeInputLabelContainer">
-            <label for="work-time">Work-Time</label>
-            <label for="break-time">Break-Time</label>
-          </div>
-          <div id="timeInputContainer" class="tags has-addons">
-            <input
-              id="workTime"
-              class="tag is-danger input"
-              type="number"
-              placeholder="work-time"
-              value="25"
-            />
-            <input
-              id="breakTime"
-              class="tag input"
-              type="number"
-              placeholder="break-time"
-              value="5"
-            />
-          </div>
-        </div>
+      <div id="handleTimerContainer" class="field is-horizontal">
+        <button
+          class="button is-link is-fullwidth is-rounded"
+          id="handleTimer"
+          data-btnstate="Start!"
+        >
+          Start!
+        </button>
+      </div>
+    </div>
 
-        <div class="field is-horizontal">
-          <!-- <div class="field-body"> -->
-          <!-- <div class="field"> -->
-          <!-- <p class="control is-expanded has-icons-right"> -->
-          <!-- <label for="work-time">Work-Time</label> -->
-          <!-- <input -->
-          <!-- id="workTime" -->
-          <!-- class="input button is-medium" -->
-          <!-- type="number" -->
-          <!-- placeholder="work-time" -->
-          <!-- value="25" -->
-          <!-- /> -->
-          <!-- <span class="icon is-small is-right"> -->
-          <!-- <i class="fas fa-clock"></i> -->
-          <!-- </span> -->
-          <!-- </p> -->
-          <!-- </div> -->
-          <!-- <div class="field"> -->
-          <!-- <p class="control is-expanded has-icons-left has-icons-right"> -->
-          <!-- <label for="break-time">Break-Time</label> -->
-          <!-- <input -->
-          <!-- id="breakTime" -->
-          <!-- class="input button is-medium" -->
-          <!-- type="number" -->
-          <!-- name="break-time" -->
-          <!-- placeholder="break-time" -->
-          <!-- value="15" -->
-          <!-- /> -->
-          <!-- <span class="icon is-small is-right"> -->
-          <!-- <i class="fas fa-clock"></i> -->
-          <!-- </span> -->
-          <!-- </p> -->
-          <!-- </div> -->
-          <!-- </div> -->
-          <button
-            class="button is-link is-fullwidth is-medium"
-            id="handleTimer"
-          >
-            Start!
-          </button>
+    <!--------MODAL----------->
+    <div id="timeModal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <!-- Any other Bulma elements you want -->
+
+        <div class="section" id="form">
+          <div class="time-wrapper">
+            <div id="timeInputLabelContainer">
+              <label for="work-time">Work-Time</label>
+              <label for="break-time">Break-Time</label>
+            </div>
+            <div id="timeInputContainer" class="tags has-addons">
+              <input
+                id="workTime"
+                class="tag is-danger input"
+                type="number"
+                placeholder="work-time"
+                value="25"
+              />
+              <input
+                id="breakTime"
+                class="tag input"
+                type="number"
+                placeholder="break-time"
+                value="5"
+              />
+            </div>
+            <div class="btn-wrapper">
+              <button class="button is-info is-medium" id="startBtn">
+                <i class="fas fa-play"></i>
+              </button>
+              <button class="button is-info is-medium" id="resetBtn">
+                <i class="fas fa-redo-alt"></i>
+              </button>
+            </div>
+          </div>
         </div>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
     </div>
     <!---End Wrapper--->
