@@ -1,11 +1,11 @@
 // import "./stylesheets/main.css";
 // Everything below is just a demo. You can delete all of it.
-import Pomodoro from "./pomodoro/pomodoro.js";
-
 import { ipcRenderer } from "electron";
+import Pomodoro from "./pomodoro/pomodoro.js";
 
 const modal = document.querySelector("#timeModal");
 const app = document.querySelector("#app");
+const timer = document.querySelector(".timer");
 const timeSettings = document.querySelector("#settings");
 const timeWrapper = document.querySelector(".time-wrapper");
 const menuBtn = document.querySelector(".menu__btn");
@@ -26,19 +26,38 @@ const pathTopRight = document.querySelector("#top-right");
 const pathBottomRight = document.querySelector("#bottom-right");
 const pathTopLeft = document.querySelector("#top-left");
 const pathBottomLeft = document.querySelector("#bottom-left");
-let bool = false;
-let firstBool = false;
 const w = window.innerWidth;
 const h = window.innerHeight;
-console.log("WINDOWSIZE: ", w + " : " + h);
-
 const pomodoro = new Pomodoro(
   workTimer,
   breakTimer,
   handleTimerBtn,
   timeDisplayBox,
-  setPomodoroTimer
+  timeSettings
 );
+const windowTopBar = document.createElement("div");
+
+let bool = false;
+let firstBool = false;
+
+// make frameless window movable
+windowTopBar.style.width = "100%";
+windowTopBar.style.height = "32px";
+windowTopBar.style.height = "32px";
+windowTopBar.style.cursor = "grap";
+// windowTopBar.style.backgroundColor = "#000";
+windowTopBar.style.position = "absolute";
+windowTopBar.style.top = windowTopBar.style.left = 0;
+windowTopBar.style.webkitAppRegion = "drag";
+document.body.appendChild(windowTopBar);
+
+console.log("WINDOWSIZE: ", w + " : " + h);
+
+resetBtn.addEventListener("click", () => {
+  window.location.reload();
+  // console.log(window.cache);
+});
+
 ipcRenderer.on("minimize", (event, arg) => {
   const w = window.innerWidth;
   const h = window.innerHeight;
@@ -47,6 +66,8 @@ ipcRenderer.on("minimize", (event, arg) => {
   console.log("WINDOWSIZE: ", w + " : " + h);
   if (arg) {
     app.style.background = "blueviolet";
+    timer.style.marginTop = "0";
+    timeDisplayBox.style.marginTop = "25px";
     timeDisplayContainer.style.top = "48%";
     timeDisplayContainer.style.left = "40%";
     timeDisplayTitleTag.style.display = "none";
@@ -79,6 +100,8 @@ ipcRenderer.on("minimize", (event, arg) => {
   }
   if (!arg) {
     app.style.background = "none";
+    timeDisplayBox.style.marginTop = "0";
+    timer.style.marginTop = "30px";
     timeDisplayTitleTag.style.display = "block";
     timeDisplayContainer.style.top = "50%";
     timeDisplayContainer.style.left = "50%";

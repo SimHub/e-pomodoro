@@ -8,7 +8,7 @@ export default class Pomodoro {
     breakTimer,
     handleTimerBtn,
     timeDisplayBox,
-    setPomodoroTimer
+    timeSettings
   ) {
     this._alert = false;
     this._alertW = false;
@@ -17,13 +17,9 @@ export default class Pomodoro {
     this.workTimer = workTimer;
     this.breakTimer = breakTimer;
     this.timeDisplayBox = timeDisplayBox;
-    // this.setPomodoroTimer = setPomodoroTimer;
-
-    // this.pomodoroDuration = this.workTimer.value * 60; // 25 mins to secs
-    // this.restDuration = this.breakTimer.value * 60;
+    this.timeSettings = timeSettings;
     this.pomodoroDuration = 0;
     this.restDuration = 0;
-
     this.currentTimeInSeconds = this.pomodoroDuration;
     this.currentSegment = 1;
     this.buttonText = handleTimerBtn.dataset.btnstate;
@@ -112,12 +108,13 @@ export default class Pomodoro {
       this.handleTimerBtn.classList.remove("is-success");
 
       this.timeDisplayBox.classList.remove("is-dark");
+      this.timeSettings.removeAttribute("disabled");
     }
     // console.log("INTERVAL: ", this.interval);
   }
   animateBar() {
     this.reduceTime();
-    console.log("setPomodoroTimer+++ ", this.setPomodoroTimer);
+    this.timeSettings.setAttribute("disabled", "true");
     console.log("CURRENT_SEGMENT+++: ", this.currentSegment);
     console.log("INTERVAL+++: ", this.interval);
     let segment = null;
@@ -195,7 +192,6 @@ export default class Pomodoro {
       this.timeDisplayBox.classList.add("is-success");
 
       // setTimeout(() => {
-      // console.log(this.setPomodoroTimer);
       // Change time to reflect rest duration
       this.currentTimeInSeconds = this.restDuration;
 
@@ -282,7 +278,7 @@ export default class Pomodoro {
   }
   startRest() {
     // Set new interval
-    // console.info(this.setPomodoroTimer);
+    // console.info(this.timeSettings);
     this.pomodoroDuration = this.currentTimeInSeconds;
     console.log("startREST pomodoroDuration: ", this.pomodoroDuration);
     this.reduceTime();
@@ -308,6 +304,7 @@ export default class Pomodoro {
         if (this._alertW) this._alertW = false;
         // console.info("GOTOWORK");
         this.gotToWork();
+        this.timeSettings.removeAttribute("disabled");
       }
     }, this.restDuration * 1000);
   }
@@ -333,7 +330,9 @@ export default class Pomodoro {
   gotToWork() {
     console.log("NOTIFY");
     console.log("alertW ", this._alertW);
-    const NOTIFICATION_TITLE = `WORK! ROUND-${this.currentSegment}`;
+    let _round =
+      this.currentSegment === 4 ? "Last Round" : `ROUND ${this.currentSegment}`;
+    const NOTIFICATION_TITLE = `WORK! ${_round}`;
     const NOTIFICATION_BODY = `Keep working!`;
     if (!this._alertW) {
       new Notification(NOTIFICATION_TITLE, {

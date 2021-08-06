@@ -55,6 +55,11 @@ const _option = {
   // resizable: false,
   // skipTaskbar: true,
   // frame: false,
+  titleBarStyle: "hidden",
+  trafficLightPosition: {
+    x: 10,
+    y: 10,
+  },
   // minimizable: true,
   // maximizable: true,
   // closable: true,
@@ -77,7 +82,7 @@ function minimizeWindow(mainWindow) {
       event.reply("minimize", false);
     }
     if (arg) {
-      mainWindow.setSize(230, 70, true);
+      mainWindow.setSize(230, 80, true);
       event.reply("minimize", true);
     }
   });
