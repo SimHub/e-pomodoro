@@ -108,35 +108,40 @@
           />
         </svg>
         <!-------------------------->
-        <div class="time-display">
-          <div id="timeDisplayTitleTag" class="tags has-addons">
-            <span class="tag is-danger is-rounded is-medium"
-              >simhub-Pomodoro</span
-            >
-            <button
-              id="settings"
-              class="tag button fas fa-cogs is-medium"
-            ></button>
+        <div id="timerDisplayWrapper">
+          <div id="justDoit"></div>
+          <span id="settingTag">
+            <span class="tooltip-settingTag">
+               Time <i class="fas fa-cog"></i>settings
+               </span>
+          </span>
+        <!-- <div id="tagToday" class="tag"> <span> < </span>   <span id="showDateNow">0:34</span> </div> -->
+          <div class="time-display">
+            <div id="timeDisplayTitleTag" class="tags has-addons">
+              <span class="tag is-danger sb-title-tag">sb-Pomodoro</span >
+              <button
+                id="settings"
+                class="tag button fas fa-cogs "
+              ></button>
+            </div>
+            <!-- <span class="tag is-large" id="timeDisplay">0</span> -->
           </div>
-          <!-- <span class="tag is-large" id="timeDisplay">0</span> -->
-          <span id="timeDisplay"></span>
-        </div>
-      </div>
+            <span id="timeDisplay"></span>
 
-      <div id="handleTimerContainer" class="field is-horizontal">
-        <button
-          class="button is-link is-fullwidth is-rounded"
-          id="handleTimer"
-          data-btnstate="Start!"
-        >
-          Start!
-        </button>
-      </div>
+          <div id="handleTimerContainer" class="field is-horizontal" >
+          <button
+              class="button is-fullwidth is-medium is-rounded is-ghost"
+            id="handleTimer"
+            data-btnstate="Start!"
+          >
+            Start!
+          </button>
+        </div>
     </div>
 
     <!--------MODAL----------->
     <div id="timeModal" class="modal">
-      <div class="modal-background"></div>
+      <div class="modal-background" style="background-color: rgb(204 204 204 / 86%);"></div>
       <div class="modal-content">
         <!-- Any other Bulma elements you want -->
 
@@ -149,24 +154,24 @@
             <div id="timeInputContainer" class="tags has-addons">
               <input
                 id="workTime"
-                class="tag is-danger input"
+                class="tag button is-info input"
                 type="number"
                 placeholder="work-time"
                 value="25"
               />
               <input
                 id="breakTime"
-                class="tag input"
+                class="tag button  input"
                 type="number"
                 placeholder="break-time"
                 value="5"
               />
             </div>
             <div class="btn-wrapper">
-              <button class="button is-info is-medium" id="startBtn">
+              <button class="button is-primary  is-fullwidth " id="startBtn">
                 <i class="fas fa-play"></i>
               </button>
-              <button class="button is-info is-medium" id="resetBtn">
+              <button class="button is-black is-fullwidth " id="resetBtn">
                 <i class="fas fa-redo-alt"></i>
               </button>
             </div>

@@ -52,7 +52,7 @@ const _option = {
   height: 356,
   width: 380,
   movable: true,
-  resizable: false,
+  resizable: true,
   // skipTaskbar: true,
   // frame: false,
   titleBarStyle: "hidden",

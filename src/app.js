@@ -4,8 +4,12 @@ import { ipcRenderer } from "electron";
 import Pomodoro from "./pomodoro/pomodoro.js";
 
 const modal = document.querySelector("#timeModal");
+const sbTitleTag = document.querySelector(".sb-title-tag");
 const app = document.querySelector("#app");
 const timer = document.querySelector(".timer");
+const timerDisplayWrapper = document.querySelector("#timerDisplayWrapper");
+const settingTag = document.querySelector("#settingTag");
+const pauseResumeTag = document.querySelector("#pauseResumeTag");
 const timeSettings = document.querySelector("#settings");
 const timeWrapper = document.querySelector(".time-wrapper");
 const menuBtn = document.querySelector(".menu__btn");
@@ -58,6 +62,15 @@ resetBtn.addEventListener("click", () => {
   // console.log(window.cache);
 });
 
+timeSettings.addEventListener("mouseover", () => {
+  console.log("HOVER");
+  document.querySelector(".tooltip-settingTag").style.display = "block";
+});
+timeSettings.addEventListener("mouseout", () => {
+  console.log("LEAVE");
+  document.querySelector(".tooltip-settingTag").style.display = "none";
+});
+
 ipcRenderer.on("minimize", (event, arg) => {
   const w = window.innerWidth;
   const h = window.innerHeight;
@@ -66,14 +79,15 @@ ipcRenderer.on("minimize", (event, arg) => {
   console.log("WINDOWSIZE: ", w + " : " + h);
   if (arg) {
     app.style.background = "blueviolet";
+    // document.body.style.backgroundImage = "none";
     timer.style.marginTop = "0";
-    timeDisplayBox.style.marginTop = "25px";
+    timeDisplayBox.style.top = "-53px";
+    timeDisplayBox.style.left = "-7px";
     timeDisplayContainer.style.top = "48%";
     timeDisplayContainer.style.left = "40%";
     timeDisplayTitleTag.style.display = "none";
     handleTimerContainer.style.display = "none";
     timeWrapper.style.display = "none";
-    timeDisplay.style.top = "63%";
     svgFirstSegment.style.top = "-38px";
     svgFirstSegment.style.right = "29px";
     svgFirstSegment.setAttribute("width", "122");
@@ -99,15 +113,22 @@ ipcRenderer.on("minimize", (event, arg) => {
     pathBottomLeft.setAttribute("stroke-width", "20");
   }
   if (!arg) {
-    app.style.background = "none";
-    timeDisplayBox.style.marginTop = "0";
+    app.style.background = "url(../app/images/gummy-apple-watch.png) no-repeat";
+    app.style.backgroundSize = "650px 600px";
+    app.style.backgroundPosition = "center";
+    // document.body.style.backgroundImage =
+    // "url(../app/images/gummy-apple-watch.png) no-repeat";
+    timeSettings.style.left = "0";
+    timeSettings.style.top = "-51px";
+    timeDisplayBox.style.top = "55px";
+    timeDisplayBox.style.left = "12px";
     timer.style.marginTop = "30px";
     timeDisplayTitleTag.style.display = "block";
+    timeDisplayTitleTag.style.marginTop = "-74px";
     timeDisplayContainer.style.top = "50%";
     timeDisplayContainer.style.left = "50%";
     handleTimerContainer.style.display = "block";
     timeWrapper.style.display = "block";
-    timeDisplay.style.top = "50%";
     svgFirstSegment.style.top = "0";
     svgFirstSegment.style.right = "0";
     svgFirstSegment.setAttribute("width", "163");
@@ -147,13 +168,22 @@ menuBtn.addEventListener("click", () => {
   }
 });
 
-timeSettings.addEventListener("click", () => {
+timeSettings.addEventListener("click", init);
+
+function init() {
   timeModal.classList.add("is-active");
 
   startBtn.addEventListener("click", () => {
-    console.log("click START");
+    justDoit.style.display = "none";
+    timeDisplayTitleTag.style.marginTop = "-48px";
+    timeSettings.style.position = "absolute";
+    timeSettings.style.left = "0px";
+    timeSettings.classList.add("is-warning", "is-rounded");
+    sbTitleTag.style.opacity = "0";
+
     menuBtn.classList.add("active");
     handleTimerBtn.style.display = "block";
+
     // handleTimerBtn.dataset.btnstate = "Start!";
     // handleTimerBtn.innerText = "Start!";
     timeModal.classList.remove("is-active");
@@ -168,4 +198,9 @@ timeSettings.addEventListener("click", () => {
   document.querySelector(".modal-close").addEventListener("click", () => {
     timeModal.classList.remove("is-active");
   });
-});
+
+  timerDisplayWrapper.style.backgroundImage =
+    "url('../app/images/gummy-coffee.png') no-repeat";
+
+  // timeDisplayTitleTag.style.display = "none";
+}

@@ -94,9 +94,11 @@ export default class Pomodoro {
       this.buttonText = "Pause";
       this.handleTimerBtn.dataset.btnstate = "Pause";
       this.handleTimerBtn.innerText = "Pause";
-      this.handleTimerBtn.classList.remove("is-success");
+      // this.handleTimerBtn.classList.remove("is-success");
+      // this.handleTimerBtn.classList.remove("is-warning");
 
-      this.handleTimerBtn.classList.add("is-info");
+      // this.handleTimerBtn.classList.add("is-danger");
+      // this.handleTimerBtn.classList.add("is-outlined");
       this.timeDisplayBox.classList.add("is-dark");
       // if (this._alertW) this._alertW = false;
     } else if (this.buttonText === "Pause") {
@@ -104,9 +106,10 @@ export default class Pomodoro {
       this.buttonText = "Resume";
       this.handleTimerBtn.dataset.btnstate = "Resume";
       this.handleTimerBtn.innerText = "Resume";
-      this.handleTimerBtn.classList.remove("is-info");
-      this.handleTimerBtn.classList.remove("is-success");
-
+      // this.handleTimerBtn.classList.remove("is-danger");
+      // this.handleTimerBtn.classList.remove("is-success");
+      // this.handleTimerBtn.classList.add("is-warning");
+      // this.handleTimerBtn.classList.add("is-outlined");
       this.timeDisplayBox.classList.remove("is-dark");
       this.timeSettings.removeAttribute("disabled");
     }
@@ -186,8 +189,6 @@ export default class Pomodoro {
       this.buttonText = "Rest";
       this.handleTimerBtn.dataset.btnstate = "Rest";
       this.handleTimerBtn.innerText = "Rest";
-      this.handleTimerBtn.classList.add("is-success");
-      this.handleTimerBtn.classList.remove("is-info");
 
       this.timeDisplayBox.classList.add("is-success");
 
@@ -225,9 +226,9 @@ export default class Pomodoro {
     this.buttonText = "Start!";
     this.handleTimerBtn.dataset.btnstate = "Start!";
     this.handleTimerBtn.innerText = "Start!";
-    this.handleTimerBtn.classList.remove("is-success");
-    this.handleTimerBtn.classList.remove("is-info");
-    this.handleTimerBtn.classList.add("is-link");
+    // this.handleTimerBtn.classList.remove("is-success");
+    // this.handleTimerBtn.classList.remove("is-info");
+    // this.handleTimerBtn.classList.add("is-link");
 
     this.timeDisplayBox.classList.add("is-success");
 
@@ -255,10 +256,10 @@ export default class Pomodoro {
     if (this.resting) {
       return `
       <div class="tags has-addons">
-      <span id="timeDisplayMin" class="tag is-warning is-large is-rounded">
+      <span id="timeDisplayMin" class="tag is-dark is-large is-rounded"> 
         ${this.timeDisplay().min}
       </span>
-      <span id="timeDisplaySec" class="tag is-primary is-large is-rounded">
+      <span id="timeDisplaySec" class="tag is-info is-large is-rounded"> 
         ${this.timeDisplay().sec}
       </span>
     </div>
@@ -268,10 +269,10 @@ export default class Pomodoro {
       <div class="tags has-addons">
       <span class="tag is-dark is-large is-rounded">${
         this.timeDisplay().min
-      }</span>
+      }</span> 
       <span class="tag is-info is-large is-rounded">${
         this.timeDisplay().sec
-      }</span>
+      }</span> 
     </div>
   `;
     }
@@ -292,8 +293,8 @@ export default class Pomodoro {
       this.buttonText = "Start!";
       this.handleTimerBtn.dataset.btnstate = "Start!";
       this.handleTimerBtn.innerText = "Start!";
-      this.handleTimerBtn.classList.remove("is-info");
-      this.handleTimerBtn.classList.remove("is-success");
+      // this.handleTimerBtn.classList.remove("is-info");
+      // this.handleTimerBtn.classList.remove("is-success");
       this.handleTimerBtn.removeAttribute("disabled");
 
       this.timeDisplayBox.classList.remove("is-success");
@@ -319,6 +320,7 @@ export default class Pomodoro {
   }
   takeABrake() {
     console.info("ALERT: ", this._alert);
+    this.handleTimerBtn.classList.add("is-success", "is-rounded");
     const NOTIFICATION_TITLE = "RELAX!";
     const NOTIFICATION_BODY = `Please take a Break 😴`;
     if (!this._alert) {
@@ -330,6 +332,7 @@ export default class Pomodoro {
   gotToWork() {
     console.log("NOTIFY");
     console.log("alertW ", this._alertW);
+    this.handleTimerBtn.classList.remove("is-success", "is-rounded");
     let _round =
       this.currentSegment === 4 ? "Last Round" : `ROUND ${this.currentSegment}`;
     const NOTIFICATION_TITLE = `WORK! ${_round}`;
@@ -342,9 +345,9 @@ export default class Pomodoro {
         this.buttonText = "Pause";
         this.handleTimerBtn.dataset.btnstate = "Pause";
         this.handleTimerBtn.innerText = "Pause";
-        this.handleTimerBtn.classList.remove("is-success");
+        // this.handleTimerBtn.classList.remove("is-success");
 
-        this.handleTimerBtn.classList.add("is-info");
+        // this.handleTimerBtn.classList.add("is-info");
         this.timeDisplayBox.classList.add("is-dark");
         // if (this._alertW) this._alertW = false;
       };

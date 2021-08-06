@@ -1,8 +1,10 @@
 body {
+  /* margin: 0; */
+  /* padding: 0; */
+  /* box-sizing: border-box; */
+
   /* background: url(../../app/images/bg1.png) no-repeat; */
   /* background-size: cover; */
-  background-color: black;
-  transition: 04s ease-in-out;
 }
 .container {
   height: 100vh;
@@ -27,19 +29,37 @@ h1 {
   background: white;
 }
 .timer {
-  margin-top: 30px;
+  margin-top: 25px;
   width: 330px;
   height: 330px;
   position: relative;
 }
 #app.container {
   /* transition: 0.3s ease-out; */
+  background: url(../../app/images/gummy-apple-watch.png) no-repeat;
+  background-size: 650px 600px;
+  background-position: center;
 }
 #form {
   margin-top: -21px;
 }
+#timerDisplayWrapper {
+  margin-top: 83px;
+  /* background: #404a6e; */
+  position: relative;
+  margin: 83px auto;
+  width: 136px;
+  height: 144px;
+  border-radius: 15px;
+}
+.timerDisplayWrapper-background1 {
+  background: url(../../app/images/gummy-coffee.png) no-repeat;
+}
 #timeDisplay {
+  position: absolute;
   font-size: 1.5em;
+  top: 55px;
+  left: 12px;
   /* background-color: transparent; */
   /* border: 1px dashed white; */
 }
@@ -65,25 +85,24 @@ h1 {
 }
 #workTime {
   /* color: white; */
-  /* background: #1bbee5; */
-  /* border: 1px dashed black; */
   font-weight: bold;
   font-size: 1.2em;
 }
 #breakTime {
   /* color: white; */
-  background: #eece22;
-  /* border: 1px dashed black; */
   font-weight: bold;
   font-size: 1.2em;
 }
 #handleTimerContainer {
   position: absolute;
-  bottom: 80px;
+  bottom: -14px;
+  width: 96%;
+  /* left: 21px; */
 }
 #handleTimer {
   display: none;
   font-weight: bold;
+  color: aliceblue;
   /* background: transparent; */
   /* border: 1px solid; */
 }
@@ -110,11 +129,56 @@ h1 {
   top: 0px;
   left: 0px;
 }
+#tagToday {
+  position: absolute;
+  top: 4px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: none;
+  color: white;
+}
+#tagToday span:nth-child(1) {
+  color: red;
+  font-weight: bold;
+}
+#settingTag {
+  position: absolute;
+  right: 205px;
+  top: 48px;
+  width: 20px;
+  height: 10px;
+  border-radius: 5px;
+  transform: rotate(89deg);
+  cursor: pointer;
+}
+
+#pauseResumeTag {
+  position: absolute;
+  left: 123px;
+  top: 94px;
+  width: 56px;
+  height: 10px;
+  border-radius: 5px;
+  transform: rotate(89deg);
+  cursor: pointer;
+}
+#tagToday span:nth-child(2) {
+  margin-left: -46px;
+}
+#timeDisplayTitleTag {
+  margin: 0;
+  /* border-bottom: 1px solid red; */
+}
+#timeDisplayTitleTag span:nth-child(1) {
+  width: 110px;
+}
+
 .time-display {
   width: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 29%;
+  left: 49%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -135,6 +199,45 @@ h2 {
   text-align: center;
 }
 
+/**** Tooltip ***/
+.tooltip-settingTag {
+  position: absolute;
+  display: none;
+  bottom: 130%;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 3px;
+  /* font-size: 10px; */
+  color: #eee;
+  font-size: 0.7em;
+  /* font-weight: 700; */
+  transform: rotate(180deg);
+  writing-mode: vertical-rl;
+  animation: moveup 0.4s linear;
+}
+/* .tooltip-settingTag:after { */
+/* position: absolute; */
+/* content: ""; */
+/* top: -9px; */
+/* left: 53px; */
+/* border-top: 5px solid transparent; */
+/* border-right: 5px solid transparent; */
+/* border-bottom: 5px solid black; */
+/* border-left: 5px solid transparent; */
+/* } */
+#settingTag:hover > .tooltip-settingTag {
+  display: block;
+}
+
+@keyframes moveup {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /***** Modal *****/
 .btn-wrapper {
   display: flex;
@@ -148,6 +251,15 @@ canvas {
   background: none;
 }
 
+/***JustDoit background**/
+#justDoit {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 72px;
+  background: url(../../app/images/justDoit.png) no-repeat;
+  background-size: contain;
+}
 /********Hambuerger Menu********/
 .hamburger-menu {
   position: absolute;
@@ -176,7 +288,7 @@ canvas {
   display: none;
   align-items: center;
   position: fixed;
-  top: 41px;
+  top: 50px;
   left: 20px;
   width: 26px;
   height: 26px;
@@ -196,8 +308,8 @@ canvas {
   width: 75%;
   height: 2px;
 
-  /* background-color: #616161; */
-  background-color: whitesmoke;
+  background-color: #616161;
+  /* background-color: whitesmoke; */
 
   transition-duration: 0.25s;
 }
