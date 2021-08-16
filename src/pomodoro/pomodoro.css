@@ -35,10 +35,14 @@ h1 {
   position: relative;
 }
 #app.container {
-  /* transition: 0.3s ease-out; */
   background: url(../../app/images/gummy-apple-watch.png) no-repeat;
   background-size: 650px 600px;
   background-position: center;
+}
+#app.container.coffee {
+  background: url(../../app/images/gummy-coffee.png) no-repeat;
+  background-size: 650px 600px;
+  background-position: -149px -141px;
 }
 #form {
   margin-top: -21px;
@@ -171,9 +175,13 @@ h1 {
   /* border-bottom: 1px solid red; */
 }
 #timeDisplayTitleTag span:nth-child(1) {
-  width: 110px;
+  width: 135px;
 }
 
+.sb-title-tag {
+  /* opacity: 0.7; */
+  /* margin-left: 27px; */
+}
 .time-display {
   width: 100%;
   position: absolute;

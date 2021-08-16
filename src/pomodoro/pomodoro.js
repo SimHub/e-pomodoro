@@ -8,8 +8,10 @@ export default class Pomodoro {
     breakTimer,
     handleTimerBtn,
     timeDisplayBox,
-    timeSettings
+    timeSettings,
+    app
   ) {
+    this.app = app;
     this._alert = false;
     this._alertW = false;
     this._alertWFirst = false;
@@ -280,6 +282,7 @@ export default class Pomodoro {
   startRest() {
     // Set new interval
     // console.info(this.timeSettings);
+    app.classList.add("coffee");
     this.pomodoroDuration = this.currentTimeInSeconds;
     console.log("startREST pomodoroDuration: ", this.pomodoroDuration);
     this.reduceTime();
@@ -303,6 +306,7 @@ export default class Pomodoro {
       console.info("ALERTWFIRST-rest: ", this._alertWFirst);
       if (this._alertWFirst) {
         if (this._alertW) this._alertW = false;
+        app.classList.remove("coffee");
         // console.info("GOTOWORK");
         this.gotToWork();
         this.timeSettings.removeAttribute("disabled");
@@ -343,7 +347,7 @@ export default class Pomodoro {
       }).onclick = () => {
         this.animateBar();
         this.buttonText = "Pause";
-        this.handleTimerBtn.dataset.btnstate = "Pause";
+        this.handleTimerBtn.dataset.btnstate = "ause";
         this.handleTimerBtn.innerText = "Pause";
         // this.handleTimerBtn.classList.remove("is-success");
 
@@ -358,6 +362,7 @@ export default class Pomodoro {
   goHome() {
     const NOTIFICATION_TITLE = "GO HOME!";
     const NOTIFICATION_BODY = "YOU DID A GREAT JOB!";
+    this.timeSettings.removeAttribute("disabled");
     // if (!this._alertG) {
     new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY });
     // this._alertG = true;

@@ -37,7 +37,8 @@ const pomodoro = new Pomodoro(
   breakTimer,
   handleTimerBtn,
   timeDisplayBox,
-  timeSettings
+  timeSettings,
+  app
 );
 const windowTopBar = document.createElement("div");
 
@@ -179,7 +180,7 @@ function init() {
     timeSettings.style.position = "absolute";
     timeSettings.style.left = "0px";
     timeSettings.classList.add("is-warning", "is-rounded");
-    sbTitleTag.style.opacity = "0";
+    sbTitleTag.style.opacity = "0.5";
 
     menuBtn.classList.add("active");
     handleTimerBtn.style.display = "block";
@@ -199,8 +200,8 @@ function init() {
     timeModal.classList.remove("is-active");
   });
 
-  timerDisplayWrapper.style.backgroundImage =
-    "url('../app/images/gummy-coffee.png') no-repeat";
+  // timerDisplayWrapper.style.backgroundImage =
+  // "url('../app/images/gummy-coffee.png') no-repeat";
 
   // timeDisplayTitleTag.style.display = "none";
 }

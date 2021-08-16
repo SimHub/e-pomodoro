@@ -1,5 +1,5 @@
 {
-  "name": "electron-boilerplate",
+  "name": "simhub-pomodoro",
   "productName": "Electron Boilerplate",
   "description": "Starter for your Electron application",
   "version": "0.0.0",
@@ -28,7 +28,7 @@
     "e2e": "mocha temp/e2e.js --require source-map-support/register",
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
-    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder"
+    "release": "webpack --config=build/webpack.app.config.js --env=production && electron-builder"
   },
   "dependencies": {
     "bulma": "^0.9.3",
