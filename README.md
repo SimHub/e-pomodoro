@@ -11,7 +11,7 @@
 
 Make sure you have [Node.js](https://nodejs.org) installed, then type...
 ```
-git clone https://github.com/szwacz/electron-boilerplate.git
+git clone https://github.com/SimHub/e-pomodoro.git 
 cd simhub-pomodoro-timer
 npm install
 npm start
