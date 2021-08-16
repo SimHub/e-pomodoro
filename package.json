@@ -1,12 +1,12 @@
 {
   "name": "simhub-pomodoro",
-  "productName": "Electron Boilerplate",
-  "description": "Starter for your Electron application",
+  "productName": "simhub-pomodoro",
+  "description": "ePomodoro App",
   "version": "0.0.0",
   "private": true,
-  "author": "Mr. Gumby <mr.gumby@example.com>",
-  "copyright": "© 2017, Gumby inc.",
-  "homepage": "http://example.com",
+  "author": "simhub.dev@gmail.com",
+  "copyright": "© 2021, SimHub inc.",
+  "homepage": "",
   "main": "app/main.js",
   "build": {
     "appId": "com.example.electron-boilerplate",

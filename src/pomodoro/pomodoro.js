@@ -261,7 +261,7 @@ export default class Pomodoro {
       <span id="timeDisplayMin" class="tag is-dark is-large is-rounded"> 
         ${this.timeDisplay().min}
       </span>
-      <span id="timeDisplaySec" class="tag is-info is-large is-rounded"> 
+      <span id="timeDisplaySec" class="tag is-success is-large is-rounded"> 
         ${this.timeDisplay().sec}
       </span>
     </div>
@@ -282,7 +282,7 @@ export default class Pomodoro {
   startRest() {
     // Set new interval
     // console.info(this.timeSettings);
-    app.classList.add("coffee");
+    // app.classList.add("coffee");
     this.pomodoroDuration = this.currentTimeInSeconds;
     console.log("startREST pomodoroDuration: ", this.pomodoroDuration);
     this.reduceTime();
@@ -306,7 +306,7 @@ export default class Pomodoro {
       console.info("ALERTWFIRST-rest: ", this._alertWFirst);
       if (this._alertWFirst) {
         if (this._alertW) this._alertW = false;
-        app.classList.remove("coffee");
+        // app.classList.remove("coffee");
         // console.info("GOTOWORK");
         this.gotToWork();
         this.timeSettings.removeAttribute("disabled");
