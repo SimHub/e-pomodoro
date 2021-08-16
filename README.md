@@ -12,7 +12,7 @@
 Make sure you have [Node.js](https://nodejs.org) installed, then type...
 ```
 git clone https://github.com/SimHub/e-pomodoro.git 
-cd simhub-pomodoro-timer
+cd e-pomodoro
 npm install
 npm start
 ```
