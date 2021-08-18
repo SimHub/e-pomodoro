@@ -283,7 +283,12 @@ export default class Pomodoro {
     // Set new interval
     // console.info(this.timeSettings);
     // app.classList.add("coffee");
-    this.pomodoroDuration = this.currentTimeInSeconds;
+    //
+    // start from timer input
+    this.pomodoroDuration = this.workTimer.value * 60;
+
+    // this.pomodoroDuration = this.currentTimeInSeconds;
+    //
     console.log("startREST pomodoroDuration: ", this.pomodoroDuration);
     this.reduceTime();
     // document.body.style.backgroundImage =
@@ -307,7 +312,11 @@ export default class Pomodoro {
       if (this._alertWFirst) {
         if (this._alertW) this._alertW = false;
         // app.classList.remove("coffee");
-        // console.info("GOTOWORK");
+        console.info("GOTOWORK-pomodoroDuration : ", this.pomodoroDuration);
+        console.info(
+          "GOTOWORK-currentTimeInSeconds : ",
+          this.currentTimeInSeconds
+        );
         this.gotToWork();
         this.timeSettings.removeAttribute("disabled");
       }
