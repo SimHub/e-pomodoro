@@ -3,6 +3,7 @@
 import { ipcRenderer } from "electron";
 import Pomodoro from "./pomodoro/pomodoro.js";
 
+const _html = document.querySelector("html");
 const modal = document.querySelector("#timeModal");
 const sbTitleTag = document.querySelector(".sb-title-tag");
 const app = document.querySelector("#app");
@@ -79,91 +80,116 @@ ipcRenderer.on("minimize", (event, arg) => {
   // console.log("IPCMAIN: ", arg);
   console.log("WINDOWSIZE: ", w + " : " + h);
   if (arg) {
-    app.style.background = "blueviolet";
+    _html.style.background = "aliceblue";
+    // app.style.background = "blueviolet";
     // document.body.style.backgroundImage = "none";
+    timer.style.background = "none";
     timer.style.marginTop = "0";
+
     timeDisplayBox.style.top = "-53px";
     timeDisplayBox.style.left = "-7px";
     timeDisplayContainer.style.top = "48%";
     timeDisplayContainer.style.left = "40%";
     timeDisplayTitleTag.style.display = "none";
+
     handleTimerContainer.style.display = "none";
     timeWrapper.style.display = "none";
-    svgFirstSegment.style.top = "-38px";
-    svgFirstSegment.style.right = "29px";
-    svgFirstSegment.setAttribute("width", "122");
-    svgFirstSegment.setAttribute("height", "125");
-    pathTopRight.setAttribute("stroke-width", "20");
+    svgFirstSegment.style.display = "none";
+    // svgFirstSegment.style.top = "-38px";
+    // svgFirstSegment.style.right = "29px";
+    // svgFirstSegment.setAttribute("width", "122");
+    // svgFirstSegment.setAttribute("height", "125");
+    // pathTopRight.setAttribute("stroke-width", "20");
 
-    svgSecondSegment.style.bottom = "-121px";
-    svgSecondSegment.style.right = "29px";
-    svgSecondSegment.setAttribute("width", "122");
-    svgSecondSegment.setAttribute("height", "125");
-    pathBottomRight.setAttribute("stroke-width", "20");
+    svgSecondSegment.style.display = "none";
+    // svgSecondSegment.style.bottom = "-121px";
+    // svgSecondSegment.style.bottom = "-121px";
+    // svgSecondSegment.style.right = "29px";
+    // svgSecondSegment.setAttribute("width", "122");
+    // svgSecondSegment.setAttribute("height", "125");
+    // pathBottomRight.setAttribute("stroke-width", "20");
 
-    svgThirdSegment.style.bottom = "-121px";
-    svgThirdSegment.style.left = "43px";
-    svgThirdSegment.setAttribute("width", "122");
-    svgThirdSegment.setAttribute("height", "125");
-    pathTopLeft.setAttribute("stroke-width", "20");
+    svgThirdSegment.style.display = "none";
+    // svgThirdSegment.style.bottom = "-121px";
+    // svgThirdSegment.style.left = "43px";
+    // svgThirdSegment.setAttribute("width", "122");
+    // svgThirdSegment.setAttribute("height", "125");
+    // pathTopLeft.setAttribute("stroke-width", "20");
 
-    svgFourthSegment.style.top = "-37px";
-    svgFourthSegment.style.left = "43px";
-    svgFourthSegment.setAttribute("width", "122");
-    svgFourthSegment.setAttribute("height", "125");
-    pathBottomLeft.setAttribute("stroke-width", "20");
+    svgFourthSegment.style.display = "none";
+    // svgFourthSegment.style.top = "-37px";
+    // svgFourthSegment.style.left = "43px";
+    // svgFourthSegment.setAttribute("width", "122");
+    // svgFourthSegment.setAttribute("height", "125");
+    // pathBottomLeft.setAttribute("stroke-width", "20");
   }
   if (!arg) {
-    app.style.background = "url(../app/images/gummy-apple-watch.png) no-repeat";
-    app.style.backgroundSize = "650px 600px";
-    app.style.backgroundPosition = "center";
+    _html.style.background = "none";
+    // app.style.background = "none";
+    // app.style.background = "url(../app/images/gummy-apple-watch.png) no-repeat";
+    // app.style.backgroundSize = "650px 600px";
+    // app.style.backgroundPosition = "center";
     // document.body.style.backgroundImage =
     // "url(../app/images/gummy-apple-watch.png) no-repeat";
     timeSettings.style.left = "0";
     timeSettings.style.top = "-51px";
     timeDisplayBox.style.top = "55px";
     timeDisplayBox.style.left = "12px";
+
+    timer.style.background = "url(images/gummy-apple-watch.png) no-repeat";
+    timer.style.backgroundSize = "650px 600px";
+    timer.style.backgroundPosition = "center";
     timer.style.marginTop = "30px";
+
     timeDisplayTitleTag.style.display = "block";
     timeDisplayTitleTag.style.marginTop = "-74px";
     timeDisplayContainer.style.top = "50%";
     timeDisplayContainer.style.left = "50%";
     handleTimerContainer.style.display = "block";
     timeWrapper.style.display = "block";
-    svgFirstSegment.style.top = "0";
-    svgFirstSegment.style.right = "0";
-    svgFirstSegment.setAttribute("width", "163");
-    svgFirstSegment.setAttribute("height", "165");
-    pathTopRight.setAttribute("stroke-width", "15");
 
-    svgSecondSegment.style.bottom = "0";
-    svgSecondSegment.style.right = "0";
-    svgSecondSegment.setAttribute("width", "163");
-    svgSecondSegment.setAttribute("height", "165");
-    pathBottomRight.setAttribute("stroke-width", "15");
+    svgFirstSegment.style.display = "block";
+    // svgFirstSegment.style.top = "0";
+    // svgFirstSegment.style.right = "0";
+    // svgFirstSegment.setAttribute("width", "163");
+    // svgFirstSegment.setAttribute("height", "165");
+    // pathTopRight.setAttribute("stroke-width", "15");
 
-    svgThirdSegment.style.bottom = "0";
-    svgThirdSegment.style.left = "0";
-    svgThirdSegment.setAttribute("width", "163");
-    svgThirdSegment.setAttribute("height", "165");
-    pathTopLeft.setAttribute("stroke-width", "15");
+    svgSecondSegment.style.display = "block";
+    // svgSecondSegment.style.bottom = "0";
+    // svgSecondSegment.style.right = "0";
+    // svgSecondSegment.setAttribute("width", "163");
+    // svgSecondSegment.setAttribute("height", "165");
+    // pathBottomRight.setAttribute("stroke-width", "15");
 
-    svgFourthSegment.style.top = "0";
-    svgFourthSegment.style.left = "0";
-    svgFourthSegment.setAttribute("width", "163");
-    svgFourthSegment.setAttribute("height", "165");
-    pathBottomLeft.setAttribute("stroke-width", "15");
+    svgThirdSegment.style.display = "block";
+    // svgThirdSegment.style.bottom = "0";
+    // svgThirdSegment.style.left = "0";
+    // svgThirdSegment.setAttribute("width", "163");
+    // svgThirdSegment.setAttribute("height", "165");
+    // pathTopLeft.setAttribute("stroke-width", "15");
+
+    svgFourthSegment.style.display = "block";
+    // svgFourthSegment.style.top = "0";
+    // svgFourthSegment.style.left = "0";
+    // svgFourthSegment.setAttribute("width", "163");
+    // svgFourthSegment.setAttribute("height", "165");
+    // pathBottomLeft.setAttribute("stroke-width", "15");
   }
 });
 
-menuBtn.addEventListener("click", () => {
-  console.log(ipcRenderer);
+menuBtn.addEventListener("click", (e) => {
+  const _this = e.target;
+  // console.log(ipcRenderer);
   if (bool) {
     bool = false;
+    _this.style.color = "#616161";
+    console.log("_THIS : ", _this);
     timeModal.classList.add("mobile");
     ipcRenderer.send("minimize", bool);
   } else if (!bool) {
     bool = true;
+    _this.style.color = "white";
     timeModal.classList.remove("mobile");
     ipcRenderer.send("minimize", bool);
   }

@@ -33,12 +33,15 @@ h1 {
   width: 330px;
   height: 330px;
   position: relative;
-}
-#app.container {
   background: url(images/gummy-apple-watch.png) no-repeat;
   background-size: 650px 600px;
   background-position: center;
 }
+/* #app.container { */
+/* background: url(images/gummy-apple-watch.png) no-repeat; */
+/* background-size: 650px 600px; */
+/* background-position: center; */
+/* } */
 #app.container.coffee {
   background: url(images/gummy-coffee.png) no-repeat;
   background-size: 650px 600px;
