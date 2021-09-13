@@ -13,13 +13,17 @@ import {
   Notification,
 } from "electron";
 import appMenuTemplate from "./menu/app_menu_template";
-import editMenuTemplate from "./menu/edit_menu_template";
+// import AppMenu from "./menu/app_menu_template";
+// import editMenuTemplate from "./menu/edit_menu_template";
 import devMenuTemplate from "./menu/dev_menu_template";
+// import zoomMenuTemplate from "./menu/zoom_menu_template";
 import createWindow from "./helpers/window";
 
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
+
+let mainWindow = {};
 
 let minimizedCount = 0;
 // Save userData in separate folders for each environment.
@@ -32,7 +36,28 @@ if (env.name !== "production") {
 // console.log(path.join(__dirname, ""));
 
 const setApplicationMenu = () => {
-  const menus = [appMenuTemplate, editMenuTemplate];
+  // const menus = [AppMenu(mainWindow)];
+  const editTemplate = {
+    label: "View",
+    submenu: [
+      {
+        label: "default-size",
+        click() {
+          mainWindow.send("minimize", false);
+          mainWindow.setSize(356, 380, true);
+        },
+      },
+      { type: "separator" },
+      {
+        label: "minimize",
+        click() {
+          mainWindow.send("minimize", true);
+          mainWindow.setSize(230, 80, true);
+        },
+      },
+    ],
+  };
+  const menus = [appMenuTemplate, editTemplate];
   if (env.name !== "production") {
     menus.push(devMenuTemplate);
   }
@@ -88,7 +113,7 @@ function minimizeWindow(mainWindow) {
   });
 }
 function createMainWindow(option) {
-  const mainWindow = createWindow("main", option);
+  mainWindow = createWindow("main", option);
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, "app.html"),
@@ -105,10 +130,10 @@ function createMainWindow(option) {
 }
 
 app.on("ready", () => {
-  setApplicationMenu();
+  createMainWindow(_option);
   // initIpc();
   // createWindow
-  createMainWindow(_option);
+  setApplicationMenu();
 });
 
 app.on("window-all-closed", () => {

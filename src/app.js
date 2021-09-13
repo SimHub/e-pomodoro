@@ -76,10 +76,13 @@ timeSettings.addEventListener("mouseout", () => {
 ipcRenderer.on("minimize", (event, arg) => {
   const w = window.innerWidth;
   const h = window.innerHeight;
+  console.log("ipcRenderEvent", event);
+  console.log("ipcRenderArg", arg);
   console.log("WINDOWSIZE: ", w + " : " + h);
   // console.log("IPCMAIN: ", arg);
   console.log("WINDOWSIZE: ", w + " : " + h);
   if (arg) {
+    bool = true;
     _html.style.background = "aliceblue";
     // app.style.background = "blueviolet";
     // document.body.style.backgroundImage = "none";
@@ -95,42 +98,16 @@ ipcRenderer.on("minimize", (event, arg) => {
     handleTimerContainer.style.display = "none";
     timeWrapper.style.display = "none";
     svgFirstSegment.style.display = "none";
-    // svgFirstSegment.style.top = "-38px";
-    // svgFirstSegment.style.right = "29px";
-    // svgFirstSegment.setAttribute("width", "122");
-    // svgFirstSegment.setAttribute("height", "125");
-    // pathTopRight.setAttribute("stroke-width", "20");
 
     svgSecondSegment.style.display = "none";
-    // svgSecondSegment.style.bottom = "-121px";
-    // svgSecondSegment.style.bottom = "-121px";
-    // svgSecondSegment.style.right = "29px";
-    // svgSecondSegment.setAttribute("width", "122");
-    // svgSecondSegment.setAttribute("height", "125");
-    // pathBottomRight.setAttribute("stroke-width", "20");
 
     svgThirdSegment.style.display = "none";
-    // svgThirdSegment.style.bottom = "-121px";
-    // svgThirdSegment.style.left = "43px";
-    // svgThirdSegment.setAttribute("width", "122");
-    // svgThirdSegment.setAttribute("height", "125");
-    // pathTopLeft.setAttribute("stroke-width", "20");
 
     svgFourthSegment.style.display = "none";
-    // svgFourthSegment.style.top = "-37px";
-    // svgFourthSegment.style.left = "43px";
-    // svgFourthSegment.setAttribute("width", "122");
-    // svgFourthSegment.setAttribute("height", "125");
-    // pathBottomLeft.setAttribute("stroke-width", "20");
   }
   if (!arg) {
+    bool = false;
     _html.style.background = "none";
-    // app.style.background = "none";
-    // app.style.background = "url(../app/images/gummy-apple-watch.png) no-repeat";
-    // app.style.backgroundSize = "650px 600px";
-    // app.style.backgroundPosition = "center";
-    // document.body.style.backgroundImage =
-    // "url(../app/images/gummy-apple-watch.png) no-repeat";
     timeSettings.style.left = "0";
     timeSettings.style.top = "-51px";
     timeDisplayBox.style.top = "55px";
@@ -149,32 +126,11 @@ ipcRenderer.on("minimize", (event, arg) => {
     timeWrapper.style.display = "block";
 
     svgFirstSegment.style.display = "block";
-    // svgFirstSegment.style.top = "0";
-    // svgFirstSegment.style.right = "0";
-    // svgFirstSegment.setAttribute("width", "163");
-    // svgFirstSegment.setAttribute("height", "165");
-    // pathTopRight.setAttribute("stroke-width", "15");
 
     svgSecondSegment.style.display = "block";
-    // svgSecondSegment.style.bottom = "0";
-    // svgSecondSegment.style.right = "0";
-    // svgSecondSegment.setAttribute("width", "163");
-    // svgSecondSegment.setAttribute("height", "165");
-    // pathBottomRight.setAttribute("stroke-width", "15");
-
     svgThirdSegment.style.display = "block";
-    // svgThirdSegment.style.bottom = "0";
-    // svgThirdSegment.style.left = "0";
-    // svgThirdSegment.setAttribute("width", "163");
-    // svgThirdSegment.setAttribute("height", "165");
-    // pathTopLeft.setAttribute("stroke-width", "15");
 
     svgFourthSegment.style.display = "block";
-    // svgFourthSegment.style.top = "0";
-    // svgFourthSegment.style.left = "0";
-    // svgFourthSegment.setAttribute("width", "163");
-    // svgFourthSegment.setAttribute("height", "165");
-    // pathBottomLeft.setAttribute("stroke-width", "15");
   }
 });
 

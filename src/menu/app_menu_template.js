@@ -8,7 +8,7 @@ export default {
       accelerator: "CmdOrCtrl+Q",
       click: () => {
         app.quit();
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
