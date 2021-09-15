@@ -109,7 +109,7 @@ ipcRenderer.on("minimize", (event, arg) => {
     bool = false;
     _html.style.background = "none";
     timeSettings.style.left = "0";
-    timeSettings.style.top = "-51px";
+    timeSettings.style.top = "0";
     timeDisplayBox.style.top = "55px";
     timeDisplayBox.style.left = "12px";
 
@@ -158,9 +158,6 @@ function init() {
 
   startBtn.addEventListener("click", () => {
     justDoit.style.display = "none";
-    timeDisplayTitleTag.style.marginTop = "-48px";
-    timeSettings.style.position = "absolute";
-    timeSettings.style.left = "0px";
     timeSettings.classList.add("is-warning", "is-rounded");
     sbTitleTag.style.opacity = "0.5";
 
@@ -181,9 +178,4 @@ function init() {
   document.querySelector(".modal-close").addEventListener("click", () => {
     timeModal.classList.remove("is-active");
   });
-
-  // timerDisplayWrapper.style.backgroundImage =
-  // "url('../app/images/gummy-coffee.png') no-repeat";
-
-  // timeDisplayTitleTag.style.display = "none";
 }

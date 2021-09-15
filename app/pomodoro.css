@@ -174,11 +174,22 @@ h1 {
   margin-left: -46px;
 }
 #timeDisplayTitleTag {
-  margin: 0;
+  /* margin: 0; */
   /* border-bottom: 1px solid red; */
+  margin-top: -48px;
+  position: absolute;
+  left: 0px;
 }
 #timeDisplayTitleTag span:nth-child(1) {
+  display: block;
+  opacity: 0.5;
+  text-align: right;
+  line-height: 23px;
   width: 135px;
+}
+#settings {
+  position: absolute;
+  left: 0px;
 }
 
 .sb-title-tag {
