@@ -73,6 +73,9 @@ timeSettings.addEventListener("mouseout", () => {
   document.querySelector(".tooltip-settingTag").style.display = "none";
 });
 
+//// open window defaultSize
+ipcRenderer.send("minimize", false);
+//
 ipcRenderer.on("minimize", (event, arg) => {
   const w = window.innerWidth;
   const h = window.innerHeight;
